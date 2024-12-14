@@ -1,4 +1,4 @@
-package com.example.proyecto;
+package com.example.proyecto.util;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,7 +9,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.List;
+import com.example.proyecto.R;
+import com.example.proyecto.models.Datos;
+import com.example.proyecto.services.LoginService;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -19,14 +21,14 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginUsuario extends AppCompatActivity {
     private EditText editTextUsername;
     private EditText editTextPassword;
     public static final String BASE_URI = "http://10.0.2.2:8080/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
         //Validamos los campos de EditText
         editTextUsername = findViewById(R.id.name);
         editTextPassword = findViewById(R.id.password);
@@ -56,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        MainService login = retrofit.create(MainService.class);
+        LoginService login = retrofit.create(LoginService.class);
         Call<Datos> call = login.loginUser(datosLogin);
         String respuesta = null;
 
@@ -69,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                     Datos datosresponse = response.body();
                     int id= Integer.parseInt(datosresponse.getId());
                     //Login exitoso
-                    Toast.makeText(MainActivity.this, "Login exitoso", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginUsuario.this, "Login exitoso", Toast.LENGTH_SHORT).show();
                     Log.i("INFO", "Sesion Iniciada");
                     SharedPreferences prefs= getSharedPreferences("LoginPrefs", MODE_PRIVATE);
                     SharedPreferences.Editor editor = prefs.edit();
@@ -79,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                     editor.putInt("id", id);
                     editor.apply();
                     //Empezar ShopActivity
-                    Intent intent = new Intent(MainActivity.this, ShopActivity.class);
+                    Intent intent = new Intent(LoginUsuario.this, MenuUsuario.class);
                     startActivity(intent);
                     finish();
 
@@ -87,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else {
                     //Por si falla el login
-                    Toast.makeText(MainActivity.this, "Ha fallado el login. Inténtalo otra vez.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginUsuario.this, "Ha fallado el login. Inténtalo otra vez.", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -96,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Datos> call, Throwable t) {
 
-                Toast.makeText(MainActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginUsuario.this, "Network error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 Log.i("Error", t.getMessage());
             }
 
@@ -105,8 +107,9 @@ public class MainActivity extends AppCompatActivity {
 
 
   public void registerOnClick(View v){
-      Intent intent = new Intent (MainActivity.this, RegistrarUsuario.class);
+      Intent intent = new Intent (LoginUsuario.this, RegistrarUsuario.class);
       startActivity(intent);
+      finish();
     }
 }
 

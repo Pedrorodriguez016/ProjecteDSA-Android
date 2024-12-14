@@ -1,6 +1,6 @@
-package com.example.proyecto;
+package com.example.proyecto.services;
 
-import java.util.List;
+import com.example.proyecto.models.DatosRegistro;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

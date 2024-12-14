@@ -1,4 +1,4 @@
-package com.example.proyecto;
+package com.example.proyecto.util;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,7 +9,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.concurrent.TimeUnit;
+import com.example.proyecto.R;
+import com.example.proyecto.models.Datos;
+import com.example.proyecto.services.LoginService;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -58,14 +60,14 @@ public class SplashScreen extends AppCompatActivity {
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        MainService login = retrofit.create(MainService.class);
+        LoginService login = retrofit.create(LoginService.class);
         Call<Datos> call= login.loginUser(datoslogin);
         call.enqueue(new Callback<Datos>() {
             @Override
             public void onResponse(Call<Datos> call, Response<Datos> response) {
                 if (response.isSuccessful()) {
                     // Login válido, ir a Shop
-                    goToShop();
+                    goToMenu();
                 } else {
                     goToLogin();
                 }
@@ -82,13 +84,13 @@ public class SplashScreen extends AppCompatActivity {
     }
 
     private void goToLogin() {
-        intent = new Intent(SplashScreen.this, MainActivity.class);
+        intent = new Intent(SplashScreen.this, LoginUsuario.class);
         startActivity(intent);
         finish();
     }
 
-    private void goToShop() {
-        intent = new Intent(SplashScreen.this, ShopActivity.class);
+    private void goToMenu() {
+        intent = new Intent(SplashScreen.this, MenuUsuario.class);
         startActivity(intent);
         finish();
     }

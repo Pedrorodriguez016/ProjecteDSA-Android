@@ -1,4 +1,4 @@
-package com.example.proyecto;
+package com.example.proyecto.util;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.List;
+import com.example.proyecto.R;
+import com.example.proyecto.models.DatosRegistro;
+import com.example.proyecto.services.RegistroService;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -33,6 +35,11 @@ public class RegistrarUsuario extends AppCompatActivity{
         editTextEmail = findViewById(R.id.MailText);
         editTextConfirmacion= findViewById(R.id.ConfirmacionText);
 
+    }
+    public void LoginOnClick(View v) {
+        Intent intent = new Intent(RegistrarUsuario.this, LoginUsuario.class);
+        startActivity(intent);
+        finish();
     }
     public void RegisteronClick(View v) {
 
@@ -82,7 +89,7 @@ public class RegistrarUsuario extends AppCompatActivity{
                     editor.putString("username", username);
                     editor.putString("password", password);
                     editor.apply();
-                    Intent intent = new Intent(RegistrarUsuario.this, ShopActivity.class);
+                    Intent intent = new Intent(RegistrarUsuario.this, MenuUsuario.class);
                     startActivity(intent);
                     finish();
 

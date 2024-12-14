@@ -1,9 +1,10 @@
-package com.example.proyecto;
+package com.example.proyecto.util;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,8 +20,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import java.util.ArrayList;
+
 import android.widget.ProgressBar;
+
+import com.example.proyecto.R;
+import com.example.proyecto.models.Datos;
+import com.example.proyecto.models.Item;
+import com.example.proyecto.services.ShopService;
 
 
 public class ShopActivity extends AppCompatActivity {
@@ -83,9 +89,6 @@ public class ShopActivity extends AppCompatActivity {
         });
     }
 
-
-
-
     private void purchaseItem(Item item) {
         Toast.makeText(this, "Comprando " + item.getType(), Toast.LENGTH_SHORT).show();
         progressBar.setVisibility(View.VISIBLE);
@@ -133,5 +136,10 @@ public class ShopActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
             }
         });
+    }
+    public void VolverOnClick(View v){
+        Intent intent = new Intent (ShopActivity.this, MenuUsuario.class);
+        startActivity(intent);
+        finish();
     }
 }

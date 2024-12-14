@@ -1,4 +1,4 @@
-package com.example.proyecto;
+package com.example.proyecto.util;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.proyecto.R;
+import com.example.proyecto.models.Item;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,19 +53,19 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
         holder.itemPrice.setText(item.getValue() + " coins");
 
         switch(item.getType()) {
-            case "SWORD":
+            case "sword":
                 holder.itemImage.setImageResource(R.drawable.sword);
                 break;
-            case "ARMOR":
+            case "armor":
                 holder.itemImage.setImageResource(R.drawable.armadura);
                 break;
-            case "SHIELD":
+            case "shield":
                 holder.itemImage.setImageResource(R.drawable.escudo);
                 break;
-            case "KNIFE":
+            case "knife":
                 holder.itemImage.setImageResource(R.drawable.knife);
                 break;
-            case "POTION":
+            case "potion":
                 holder.itemImage.setImageResource(R.drawable.potion);
                 break;
         }

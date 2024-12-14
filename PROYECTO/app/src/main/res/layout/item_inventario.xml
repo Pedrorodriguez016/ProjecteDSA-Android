@@ -14,7 +14,7 @@
         android:padding="16dp">
 
         <ImageView
-            android:id="@+id/itemImage"
+            android:id="@+id/itemimage"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:scaleType="fitCenter"/>
@@ -27,26 +27,14 @@
             android:layout_marginStart="16dp">
 
             <TextView
-                android:id="@+id/itemName"
+                android:id="@+id/itemname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:textStyle="bold"/>
 
-            <TextView
-                android:id="@+id/itemPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"/>
         </LinearLayout>
 
-        <Button
-            android:id="@+id/buyButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:backgroundTint="@android:color/holo_green_dark"
-            android:text="Comprar" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

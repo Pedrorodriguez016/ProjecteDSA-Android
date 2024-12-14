@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/tiendabtn"
+        android:layout_width="126dp"
+        android:layout_height="123dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="200dp"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:onClick="TiendaOnClick"
+        android:text="Tienda"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/perfilbtn"
+        android:layout_width="126dp"
+        android:layout_height="123dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="56dp"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:onClick="PerfilOnClick"
+        android:text="Perfil"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/inventariobtn"
+        android:layout_width="126dp"
+        android:layout_height="123dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginBottom="268dp"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:onClick="InventarioOnClick"
+        android:text="Inventario"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/Cerrarbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="28dp"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:onClick="CerrarOnClick"
+        android:text="Cerrar Sesion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
