@@ -13,10 +13,6 @@ import com.example.proyecto.R;
 import com.example.proyecto.models.Datos;
 import com.example.proyecto.services.LoginService;
 
-import org.w3c.dom.Text;
-
-import java.util.List;
-
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -32,6 +28,7 @@ public class PerfilUsuario extends AppCompatActivity {
     private TextView Dinero;
     private ProgressBar progressBar;
     public static final String BASE_URI = "http://10.0.2.2:8080/";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +39,8 @@ public class PerfilUsuario extends AppCompatActivity {
         progressBar = findViewById(R.id.progressPerfil);
         CargarDatos();
     }
-    public void CargarDatos(){
+
+    public void CargarDatos() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
@@ -54,37 +52,33 @@ public class PerfilUsuario extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         LoginService lista = retrofit.create(LoginService.class);
         SharedPreferences prefs = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
-        int id= prefs.getInt("id",-1);
+        int id = prefs.getInt("id", -1);
         lista.getUser(id).enqueue(new Callback<Datos>() {
             @Override
-            public void onResponse(Call< Datos> call, Response<Datos> response) {
-
-
+            public void onResponse(Call<Datos> call, Response<Datos> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                Datos datos = response.body();
-                Usuario.setText(datos.getUsername());
-                Email.setText(datos.getEmail());
-                Dinero.setText(String.valueOf(datos.getMoney()));
-                Log.i("datos", "username" + datos.getUsername() + "email" + datos.getEmail() + "dinero" + String.valueOf(datos.getMoney()));
-                progressBar.setVisibility(View.GONE);
-                }
-
-                 else {
+                    Datos datos = response.body();
+                    Usuario.setText(datos.getUsername());
+                    Email.setText(datos.getEmail());
+                    Dinero.setText(String.valueOf(datos.getMoney()));
+                    Log.i("datos", "username" + datos.getUsername() + "email" + datos.getEmail() + "dinero" + datos.getMoney());
+                    progressBar.setVisibility(View.GONE);
+                } else {
                     Log.e("Error", "Error al cargar los datos: " + response.code());
                     progressBar.setVisibility(View.GONE);
                 }
             }
 
             @Override
-            public void onFailure(Call <Datos> call, Throwable t) {
+            public void onFailure(Call<Datos> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
                 Log.e("Error", "Error de conexión: " + t.getMessage());
             }
-
         });
     }
-    public void VolverOnClick(View v){
-        Intent intent = new Intent (PerfilUsuario.this, MenuUsuario.class);
+
+    public void VolverOnClick(View v) {
+        Intent intent = new Intent(PerfilUsuario.this, MenuUsuario.class);
         startActivity(intent);
         finish();
     }
