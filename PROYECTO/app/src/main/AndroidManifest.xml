@@ -33,6 +33,8 @@
             android:exported="false"></activity>
         <activity android:name=".util.Inventario"
             android:exported="false"></activity>
+        <activity android:name=".util.PerfilUsuario"
+            android:exported="false"></activity>
 
     </application>
 

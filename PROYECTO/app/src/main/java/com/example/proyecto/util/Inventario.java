@@ -48,8 +48,7 @@ public class Inventario extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new InventarioAdapter(this, items);
         recyclerView.setAdapter(adapter);
-        SharedPreferences prefs = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
-        int id= prefs.getInt("id",-1);
+
         CargarInventario();
 
     }
@@ -64,6 +63,10 @@ public class Inventario extends AppCompatActivity {
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+
+        SharedPreferences prefs = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
+        int id= prefs.getInt("id",-1);
+        Log.i("id", "id usuario"+ id);
         ShopService lista = retrofit.create(ShopService.class);
         progressBar.setVisibility(View.VISIBLE);
         lista.inventario(id).enqueue(new Callback<List<Item>>() {

@@ -48,8 +48,6 @@ public class ShopActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ShopAdapter(this, items, this::purchaseItem);
         recyclerView.setAdapter(adapter);
-        SharedPreferences prefs = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
-        int id= prefs.getInt("id",-1);
         CargarTienda();
 
     }
@@ -102,6 +100,9 @@ public class ShopActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
+        SharedPreferences prefs = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
+        int id= prefs.getInt("id",-1);
+        Log.i("id", "id usuario + id");
         ShopService lista = retrofit.create(ShopService.class);
         lista.purchaseItem(id, item.getId()).enqueue(new Callback<Void>() {
             @Override

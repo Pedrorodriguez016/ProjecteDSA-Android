@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.proyecto.R;
 
 public class MenuUsuario extends AppCompatActivity {
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
@@ -28,7 +29,7 @@ public class MenuUsuario extends AppCompatActivity {
         finish();
     }
     public void PerfilOnClick(View v) {
-        Intent intent = new Intent(MenuUsuario.this, ShopActivity.class);
+        Intent intent = new Intent(MenuUsuario.this, PerfilUsuario.class);
         startActivity(intent);
         finish();
     }
@@ -37,11 +38,11 @@ public class MenuUsuario extends AppCompatActivity {
         Log.i("INFO", "Cerrando Session");
         SharedPreferences prefs= getSharedPreferences("LoginPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putBoolean("isLoggedIn", false);
         editor.remove("username");
         editor.remove("password");
         editor.remove("id");
-        editor.apply();
+        editor.clear();
+        editor.commit();
 
         Intent intent = new Intent(MenuUsuario.this, LoginUsuario.class);
         startActivity(intent);

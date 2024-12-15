@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.proyecto.R;
 import com.example.proyecto.models.DatosRegistro;
+import com.example.proyecto.services.LoginService;
 import com.example.proyecto.services.RegistroService;
 
 import okhttp3.OkHttpClient;
@@ -71,7 +72,7 @@ public class RegistrarUsuario extends AppCompatActivity{
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        RegistroService register = retrofit.create(RegistroService.class);
+        LoginService register = retrofit.create(LoginService.class);
         Call<DatosRegistro> call = register.newUser(d);
         String respuesta = null;
 

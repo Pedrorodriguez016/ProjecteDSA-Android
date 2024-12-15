@@ -8,7 +8,5 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface RegistroService {
-    @POST("game/user")
-    @Headers("Content-Type: application/json")
-    Call<DatosRegistro> newUser(@Body DatosRegistro d);
+
 }
