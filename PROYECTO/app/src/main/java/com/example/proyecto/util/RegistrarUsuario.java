@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.proyecto.R;
+import com.example.proyecto.models.Datos;
 import com.example.proyecto.models.DatosRegistro;
 import com.example.proyecto.services.LoginService;
 import com.example.proyecto.services.RegistroService;
@@ -83,12 +84,15 @@ public class RegistrarUsuario extends AppCompatActivity{
 
                 if (response.isSuccessful()) {
                     //Registro con éxito
+                    DatosRegistro datosresponse = response.body();
+                    int id= Integer.parseInt(datosresponse.getId());
                     Toast.makeText(RegistrarUsuario.this, "Registro completado.", Toast.LENGTH_SHORT).show();
                     SharedPreferences prefs= getSharedPreferences("LoginPrefs", MODE_PRIVATE);
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.putBoolean("isLoggedIn", true);
                     editor.putString("username", username);
                     editor.putString("password", password);
+                    editor.putInt("id", id);
                     editor.apply();
                     Intent intent = new Intent(RegistrarUsuario.this, MenuUsuario.class);
                     startActivity(intent);
