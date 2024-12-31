@@ -44,20 +44,20 @@ public class InventarioAdapter extends RecyclerView.Adapter<InventarioAdapter.Vi
         Item item = items.get(position);
         holder.itemName.setText(item.getType());
 
-        switch(item.getType()) {
-            case "sword":
+        switch(item.getId()) {
+            case 5:
                 holder.itemImage.setImageResource(R.drawable.sword);
                 break;
-            case "armor":
+            case 3:
                 holder.itemImage.setImageResource(R.drawable.armadura);
                 break;
-            case "shield":
+            case 2:
                 holder.itemImage.setImageResource(R.drawable.escudo);
                 break;
-            case "knife":
+            case 1:
                 holder.itemImage.setImageResource(R.drawable.knife);
                 break;
-            case "potion":
+            case 4:
                 holder.itemImage.setImageResource(R.drawable.potion);
                 break;
         }

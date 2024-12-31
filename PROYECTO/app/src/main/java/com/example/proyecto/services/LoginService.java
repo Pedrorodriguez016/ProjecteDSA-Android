@@ -20,6 +20,6 @@ public interface LoginService {
     @POST("game/user")
     @Headers("Content-Type: application/json")
     Call<DatosRegistro> newUser(@Body DatosRegistro d);
-    @GET("game/user/{id}")
-    Call<Datos> getUser(@Path("id")int userId);
+    @GET("game/user/{username}")
+    Call<Datos> getUser(@Path("username")String username);
 }

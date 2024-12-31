@@ -52,8 +52,8 @@ public class PerfilUsuario extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         LoginService lista = retrofit.create(LoginService.class);
         SharedPreferences prefs = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
-        int id = prefs.getInt("id", -1);
-        lista.getUser(id).enqueue(new Callback<Datos>() {
+        String username = prefs.getString("username", "");
+        lista.getUser(username).enqueue(new Callback<Datos>() {
             @Override
             public void onResponse(Call<Datos> call, Response<Datos> response) {
                 if (response.isSuccessful() && response.body() != null) {

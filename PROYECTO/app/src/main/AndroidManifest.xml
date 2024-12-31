@@ -35,6 +35,8 @@
             android:exported="false"></activity>
         <activity android:name=".util.PerfilUsuario"
             android:exported="false"></activity>
+        <activity android:name=".util.FAQSActivity"
+            android:exported="false"></activity>
 
     </application>
 

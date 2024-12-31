@@ -63,12 +63,21 @@
 
             <Button
                 android:id="@+id/inventariobtn"
-                android:layout_width="195dp"
+                android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:backgroundTint="@android:color/holo_blue_dark"
                 android:onClick="InventarioOnClick"
                 android:text="Inventario"
                 android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/faqbtn"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:backgroundTint="@android:color/holo_blue_dark"
+                android:onClick="FAQsOnClick"
+                android:text="FAQs"
+                android:textSize="18sp"/>
         </LinearLayout>
 
     </LinearLayout>

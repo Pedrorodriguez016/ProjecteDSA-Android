@@ -4,7 +4,7 @@ public class Datos {
     public String username;
     public String password;
     public String id;
-    public String money;
+    public Integer money;
     public String email;
 
 
@@ -24,11 +24,11 @@ public class Datos {
         this.email = email;
     }
 
-    public String getMoney() {
+    public Integer getMoney() {
         return money;
     }
 
-    public void setMoney(String money) {
+    public void setMoney(Integer money) {
         this.money = money;
     }
 

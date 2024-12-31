@@ -33,6 +33,11 @@ public class MenuUsuario extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+    public void FAQsOnClick(View v) {
+        Intent intent = new Intent(MenuUsuario.this, FAQSActivity.class);
+        startActivity(intent);
+        finish();
+    }
     public void CerrarOnClick(View v) {
         Toast.makeText(MenuUsuario.this, "Cierre Sesion", Toast.LENGTH_SHORT).show();
         Log.i("INFO", "Cerrando Session");

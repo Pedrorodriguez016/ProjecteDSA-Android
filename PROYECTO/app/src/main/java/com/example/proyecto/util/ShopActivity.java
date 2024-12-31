@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +51,14 @@ public class ShopActivity extends AppCompatActivity {
         adapter = new ShopAdapter(this, items, this::purchaseItem);
         recyclerView.setAdapter(adapter);
         CargarTienda();
+        GetDinero();
+
+    }
+    private void GetDinero() {
+        SharedPreferences prefs = getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE);
+        int money = prefs.getInt("money", 0);
+        TextView monedasTextView = findViewById(R.id.MonedasText);
+        monedasTextView.setText(String.valueOf(money));
 
     }
     private void CargarTienda() {
@@ -101,15 +111,21 @@ public class ShopActivity extends AppCompatActivity {
                 .build();
 
         SharedPreferences prefs = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
-        int id= prefs.getInt("id",-1);
-        Log.i("id", "id usuario + id");
+        String username= prefs.getString("username","");
+        int money = prefs.getInt("money", 0);
+        Log.i("username", "usuario" + username);
         ShopService lista = retrofit.create(ShopService.class);
-        lista.purchaseItem(id, item.getId()).enqueue(new Callback<Void>() {
+        lista.purchaseItem(username, item.getId()).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(ShopActivity.this,
                             "Compra realizada con éxito", Toast.LENGTH_SHORT).show();
+                    int actmoney = money- item.getValue();
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putInt("money", actmoney);
+                    editor.apply();
+                    GetDinero();
                     progressBar.setVisibility(View.GONE);
                 }
                 else {

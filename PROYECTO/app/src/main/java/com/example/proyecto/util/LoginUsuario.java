@@ -69,8 +69,7 @@ public class LoginUsuario extends AppCompatActivity {
 
                 if (response.isSuccessful()) {
                     Datos datosresponse = response.body();
-                    int id= Integer.parseInt(datosresponse.getId());
-                    int money= Integer.parseInt(datosresponse.getMoney());
+                    int money= datosresponse.getMoney();
                     String email = datosresponse.getEmail();
                     //Login exitoso
                     Toast.makeText(LoginUsuario.this, "Login exitoso", Toast.LENGTH_SHORT).show();
@@ -80,7 +79,7 @@ public class LoginUsuario extends AppCompatActivity {
                     editor.putBoolean("isLoggedIn", true);
                     editor.putString("username", name);
                     editor.putString("password", password);
-                    editor.putInt("id", id);
+                    editor.putInt("money", money);
                     editor.apply();
                     //Empezar ShopActivity
                     Intent intent = new Intent(LoginUsuario.this, MenuUsuario.class);

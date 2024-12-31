@@ -1,17 +1,19 @@
 package com.example.proyecto.util;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
+import com.example.proyecto.models.Datos;
+import com.example.proyecto.models.FAQ;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,46 +25,36 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import android.widget.ProgressBar;
-
 import com.example.proyecto.R;
-import com.example.proyecto.models.Datos;
 import com.example.proyecto.models.Item;
+import com.example.proyecto.services.FAQService;
 import com.example.proyecto.services.ShopService;
 
+public class FAQSActivity extends AppCompatActivity {
 
-public class Inventario extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private InventarioAdapter adapter;
-    private List<Item> items = new ArrayList<>();
+    private FAQSAdapter adapter;
+    private List<FAQ> questions = new ArrayList<>();
     private ProgressBar progressBar;
     private Datos datos;
     int id;
     public static final String BASE_URI = "http://10.0.2.2:8080/";
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inventario);
-        progressBar = findViewById(R.id.progressBar2);
-        recyclerView = findViewById(R.id.recyclerView2);
+        setContentView(R.layout.activity_faqs);
+        progressBar = findViewById(R.id.progressBar);
+        recyclerView = findViewById(R.id.recyclerViewFAQ);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new InventarioAdapter(this, items);
+        adapter = new FAQSAdapter(this, questions);
         recyclerView.setAdapter(adapter);
-        GetDinero();
-        CargarInventario();
-
-    }
-    private void GetDinero() {
-        SharedPreferences prefs = getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE);
-        int money = prefs.getInt("money", 0);
-        TextView monedasTextView = findViewById(R.id.monedasText);
-        monedasTextView.setText(String.valueOf(money));
-
+        CargarFAQ();
     }
 
-    private void CargarInventario() {
+    private void CargarFAQ() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
@@ -71,20 +63,15 @@ public class Inventario extends AppCompatActivity {
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-
-        SharedPreferences prefs = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
-        String username= prefs.getString("username","");
-        Log.i("username", " usuario"+ username);
-        ShopService lista = retrofit.create(ShopService.class);
+        FAQService lista = retrofit.create(FAQService.class);
         progressBar.setVisibility(View.VISIBLE);
-        lista.inventario(username).enqueue(new Callback<List<Item>>() {
+        lista.getFAQs().enqueue(new Callback<List<FAQ>>() {
             @Override
-            public void onResponse(Call<List<Item>> call, Response<List<Item>> response) {
-
+            public void onResponse(Call<List<FAQ>> call, Response<List<FAQ>> response) {
 
                 if (response.isSuccessful() && response.body() != null) {
-                    items.clear();
-                    items.addAll(response.body());
+                    questions.clear();
+                    questions.addAll(response.body());
                     adapter.notifyDataSetChanged();
                     progressBar.setVisibility(View.GONE);
                 } else {
@@ -94,15 +81,16 @@ public class Inventario extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<Item>> call, Throwable t) {
+            public void onFailure(Call<List<FAQ>> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
                 Log.e("Error", "Error de conexión: " + t.getMessage());
             }
 
         });
     }
+
     public void VolverOnClick(View v){
-        Intent intent = new Intent (Inventario.this, MenuUsuario.class);
+        Intent intent = new Intent (FAQSActivity.this, MenuUsuario.class);
         startActivity(intent);
         finish();
     }

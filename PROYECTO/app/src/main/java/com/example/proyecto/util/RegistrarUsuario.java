@@ -9,10 +9,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.proyecto.R;
-import com.example.proyecto.models.Datos;
 import com.example.proyecto.models.DatosRegistro;
 import com.example.proyecto.services.LoginService;
-import com.example.proyecto.services.RegistroService;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
