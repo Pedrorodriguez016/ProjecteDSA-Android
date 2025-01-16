@@ -11,7 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,14 +27,14 @@ import android.widget.ProgressBar;
 
 import com.example.proyecto.R;
 import com.example.proyecto.models.Datos;
-import com.example.proyecto.models.Item;
+import com.example.proyecto.models.Inventario;
 import com.example.proyecto.services.ShopService;
 
 
-public class Inventario extends AppCompatActivity {
+public class InventarioActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private InventarioAdapter adapter;
-    private List<Item> items = new ArrayList<>();
+    private List<Inventario> items = new ArrayList<>();
     private ProgressBar progressBar;
     private Datos datos;
     int id;
@@ -77,9 +77,9 @@ public class Inventario extends AppCompatActivity {
         Log.i("username", " usuario"+ username);
         ShopService lista = retrofit.create(ShopService.class);
         progressBar.setVisibility(View.VISIBLE);
-        lista.inventario(username).enqueue(new Callback<List<Item>>() {
+        lista.inventario(username).enqueue(new Callback<List<Inventario>>() {
             @Override
-            public void onResponse(Call<List<Item>> call, Response<List<Item>> response) {
+            public void onResponse(Call<List<Inventario>> call, Response<List<Inventario>> response) {
 
 
                 if (response.isSuccessful() && response.body() != null) {
@@ -94,7 +94,7 @@ public class Inventario extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<Item>> call, Throwable t) {
+            public void onFailure(Call<List<Inventario>> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
                 Log.e("Error", "Error de conexión: " + t.getMessage());
             }
@@ -102,7 +102,7 @@ public class Inventario extends AppCompatActivity {
         });
     }
     public void VolverOnClick(View v){
-        Intent intent = new Intent (Inventario.this, MenuUsuario.class);
+        Intent intent = new Intent (InventarioActivity.this, MenuUsuario.class);
         startActivity(intent);
         finish();
     }

@@ -24,7 +24,7 @@ public class MenuUsuario extends AppCompatActivity {
         finish();
     }
     public void InventarioOnClick(View v) {
-        Intent intent = new Intent(MenuUsuario.this,Inventario.class);
+        Intent intent = new Intent(MenuUsuario.this, InventarioActivity.class);
         startActivity(intent);
         finish();
     }

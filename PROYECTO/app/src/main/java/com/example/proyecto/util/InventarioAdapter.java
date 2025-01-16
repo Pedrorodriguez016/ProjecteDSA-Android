@@ -10,21 +10,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.proyecto.R;
-import com.example.proyecto.models.Item;
+import com.example.proyecto.models.Inventario;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class InventarioAdapter extends RecyclerView.Adapter<InventarioAdapter.ViewHolder> {
-    private List<Item> items = new ArrayList<>();
+    private List<Inventario> items = new ArrayList<>();
     private Context context;
 
-    public InventarioAdapter(Context context, List<Item> items) {
+    public InventarioAdapter(Context context, List<Inventario> items) {
         this.context = context;
         this.items = items;
     }
 
-    public void updateItems(List<Item> newItems) {
+    public void updateItems(List<Inventario> newItems) {
         this.items.clear();
         if (newItems != null) {
             this.items.addAll(newItems);
@@ -41,14 +41,13 @@ public class InventarioAdapter extends RecyclerView.Adapter<InventarioAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Item item = items.get(position);
-        holder.itemName.setText(item.getType());
+        Inventario inventario = items.get(position);
 
-        switch(item.getId()) {
-            case 5:
+        switch(inventario.getItem()) {
+            case 3:
                 holder.itemImage.setImageResource(R.drawable.sword);
                 break;
-            case 3:
+            case 4:
                 holder.itemImage.setImageResource(R.drawable.armadura);
                 break;
             case 2:
@@ -57,7 +56,7 @@ public class InventarioAdapter extends RecyclerView.Adapter<InventarioAdapter.Vi
             case 1:
                 holder.itemImage.setImageResource(R.drawable.knife);
                 break;
-            case 4:
+            case 5:
                 holder.itemImage.setImageResource(R.drawable.potion);
                 break;
         }

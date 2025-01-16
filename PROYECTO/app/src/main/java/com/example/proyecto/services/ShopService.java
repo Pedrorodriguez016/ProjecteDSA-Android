@@ -1,4 +1,5 @@
 package com.example.proyecto.services;
+import com.example.proyecto.models.Inventario;
 import com.example.proyecto.models.Item;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -12,5 +13,5 @@ public interface ShopService {
     @PUT("game/user/{username}/inventory/")
     Call<Void> purchaseItem(@Path("username") String username, @Query("item") int itemId);
     @GET("game/user/{username}/inventory/")
-    Call<List<Item>> inventario(@Path("username")String username);
+    Call<List<Inventario>> inventario(@Path("username")String username);
 }
