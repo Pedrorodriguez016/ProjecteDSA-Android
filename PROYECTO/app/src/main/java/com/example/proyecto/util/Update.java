@@ -24,7 +24,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class UpdateUsername extends AppCompatActivity {
+public class Update extends AppCompatActivity {
     private ProgressBar progressBar;
     public static final String BASE_URI = "http://10.0.2.2:8080/";
     private EditText editTextEmail;
@@ -35,7 +35,7 @@ public class UpdateUsername extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.updateusername_activity);
+        setContentView(R.layout.activity_update);
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
         editTextnewPassword = findViewById(R.id.editTextNewPassword);
@@ -54,7 +54,7 @@ public class UpdateUsername extends AppCompatActivity {
     }
 
     public void PerfilOnClick(View v) {
-        Intent intent = new Intent(UpdateUsername.this, PerfilUsuario.class);
+        Intent intent = new Intent(Update.this, PerfilUsuario.class);
         startActivity(intent);
         finish();
     }
@@ -107,11 +107,11 @@ public class UpdateUsername extends AppCompatActivity {
                     editor.putString("password", datosactualizados.getPassword());
                 }
                 editor.apply();
-                Toast.makeText(UpdateUsername.this, "Usuario actualizado con éxito", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Update.this, "Usuario actualizado con éxito", Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
                 }
                 else {
-                    Toast.makeText(UpdateUsername.this, "Error al actualizar el usuario", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Update.this, "Error al actualizar el usuario", Toast.LENGTH_SHORT).show();
                     Log.e("Error", "Error al actualizar los datos: " + response.code());
                     progressBar.setVisibility(View.GONE);
                 }

@@ -38,14 +38,19 @@ public class MenuUsuario extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+    public void ForumOnClick(View v) {
+        Intent intent = new Intent(MenuUsuario.this, ForumActivity.class);
+        startActivity(intent);
+        finish();
+    }
     public void CerrarOnClick(View v) {
         Toast.makeText(MenuUsuario.this, "Cierre Sesion", Toast.LENGTH_SHORT).show();
         Log.i("INFO", "Cerrando Session");
-        SharedPreferences prefs= getSharedPreferences("LoginPrefs", MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.remove("username");
         editor.remove("password");
-        editor.remove("id");
+        editor.remove("id");  // Añadido para eliminar también el ID
         editor.clear();
         editor.commit();
 

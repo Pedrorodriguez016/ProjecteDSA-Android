@@ -37,11 +37,15 @@
             android:exported="false"></activity>
         <activity android:name=".util.FAQSActivity"
             android:exported="false"></activity>
-        <activity android:name=".util.UpdateUsername"
+        <activity android:name=".util.Update"
             android:exported="false"></activity>
-        <activity android:name=".util.UpdatePassword"
+        <activity android:name=".util.ForumActivity"
             android:exported="false"></activity>
-
+        <activity android:name=".util.ThreadDetailActivity"
+            android:exported="false"
+            tools:ignore="Instantiatable"></activity>
+        <activity android:name=".util.NewThreadActivity"
+            android:exported="false"></activity>
     </application>
 
 </manifest>

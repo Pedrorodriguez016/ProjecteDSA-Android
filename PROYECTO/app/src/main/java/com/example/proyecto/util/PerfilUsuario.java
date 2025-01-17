@@ -130,7 +130,7 @@ public class PerfilUsuario extends AppCompatActivity {
     }
 
     public void ActualizarCuenta(View v) {
-        Intent intent = new Intent(PerfilUsuario.this, UpdateUsername.class);
+        Intent intent = new Intent(PerfilUsuario.this, Update.class);
         startActivity(intent);
         finish();
     }
