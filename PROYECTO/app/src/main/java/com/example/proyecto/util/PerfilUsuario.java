@@ -77,9 +77,62 @@ public class PerfilUsuario extends AppCompatActivity {
         });
     }
 
+    public void EliminarCuenta(View v){
+
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URI)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        progressBar.setVisibility(View.VISIBLE);
+        LoginService lista = retrofit.create(LoginService.class);
+        SharedPreferences prefs = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        Datos datos= new Datos();
+        datos.setUsername(prefs.getString("username", ""));
+        datos.setPassword(prefs.getString("password",""));
+        datos.setEmail(prefs.getString("email",""));
+        datos.setId(prefs.getInt("id", 0));
+        datos.setMoney(prefs.getInt("money", 0));
+        lista.DeleteUser(datos.username, datos).enqueue(new Callback<Datos>() {
+            @Override
+            public void onResponse(Call<Datos> call, Response<Datos> response) {
+                if (response.isSuccessful()) {
+                    editor.clear();
+                    editor.commit();
+                    Intent intent = new Intent(PerfilUsuario.this, LoginUsuario.class);
+                    startActivity(intent);
+                    finish();
+                    progressBar.setVisibility(View.GONE);
+
+                } else {
+                    Log.e("Error", "Error al cargar los datos: " + response.code());
+                    progressBar.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Datos> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
+                Log.e("Error", "Error de conexión: " + t.getMessage());
+            }
+        });
+
+    }
+
     public void VolverOnClick(View v) {
         Intent intent = new Intent(PerfilUsuario.this, MenuUsuario.class);
         startActivity(intent);
         finish();
     }
+
+    public void ActualizarCuenta(View v) {
+        Intent intent = new Intent(PerfilUsuario.this, UpdateUsername.class);
+        startActivity(intent);
+        finish();
+    }
+
 }

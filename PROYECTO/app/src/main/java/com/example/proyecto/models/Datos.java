@@ -3,7 +3,7 @@ package com.example.proyecto.models;
 public class Datos {
     public String username;
     public String password;
-    public String id;
+    public Integer id;
     public Integer money;
     public String email;
 
@@ -14,6 +14,10 @@ public class Datos {
         this.id=id;
         this.money= money;
         this.email= email;
+    }
+
+    public Datos() {
+
     }
 
     public String getEmail() {
@@ -40,11 +44,11 @@ public class Datos {
         this.username = username;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 

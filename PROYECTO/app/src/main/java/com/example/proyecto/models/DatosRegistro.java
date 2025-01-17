@@ -6,7 +6,7 @@ public class DatosRegistro {
     public String username;
     public String password;
     public String email;
-    public String id;
+    public Integer id;
 
     public DatosRegistro(String username, String password, String mail) {
         this.username = username;
@@ -15,11 +15,11 @@ public class DatosRegistro {
         this.id=id;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

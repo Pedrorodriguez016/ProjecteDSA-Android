@@ -83,7 +83,7 @@ public class RegistrarUsuario extends AppCompatActivity{
                 if (response.isSuccessful()) {
                     //Registro con éxito
                     DatosRegistro datosresponse = response.body();
-                    int id= Integer.parseInt(datosresponse.getId());
+                    int id= datosresponse.getId();
                     Toast.makeText(RegistrarUsuario.this, "Registro completado.", Toast.LENGTH_SHORT).show();
                     SharedPreferences prefs= getSharedPreferences("LoginPrefs", MODE_PRIVATE);
                     SharedPreferences.Editor editor = prefs.edit();

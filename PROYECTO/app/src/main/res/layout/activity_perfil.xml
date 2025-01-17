@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ConstrainLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:onClick="EliminarCuenta">
 
     <TextView
         android:id="@+id/UsuarioText"
@@ -45,20 +46,44 @@
         android:id="@+id/progressPerfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="188dp"
+        android:layout_marginTop="256dp"
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="64dp"
+        android:layout_width="124dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
         android:onClick="VolverOnClick"
         android:text="Volver"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/EliminarCuenta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="48dp"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:onClick="EliminarCuenta"
+        android:text="Eliminar Cuenta"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ActualizarCuentabtn" />
+
+    <Button
+        android:id="@+id/ActualizarCuentabtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="80dp"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:onClick="ActualizarCuenta"
+        android:text="Cambiar Datos"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Dinerotext" />
 

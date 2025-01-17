@@ -11,7 +11,9 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface LoginService {
     @POST("game/user/login")
@@ -22,4 +24,10 @@ public interface LoginService {
     Call<DatosRegistro> newUser(@Body DatosRegistro d);
     @GET("game/user/{username}")
     Call<Datos> getUser(@Path("username")String username);
+    @POST("game/user/{username}")
+    @Headers("Content-Type: application/json")
+    Call<Datos> DeleteUser(@Path("username")String username, @Body Datos datos);
+    @PUT("game/user/{username}")
+    @Headers("Content-Type: application/json")
+    Call<Datos> UpdateUser(@Path("username") String username, @Query("chgpass") boolean changePass, @Query("newpass") String newPassword, @Body Datos d);
 }

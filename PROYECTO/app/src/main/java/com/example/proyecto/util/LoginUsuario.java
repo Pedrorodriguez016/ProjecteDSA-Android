@@ -79,6 +79,7 @@ public class LoginUsuario extends AppCompatActivity {
                     editor.putBoolean("isLoggedIn", true);
                     editor.putString("username", name);
                     editor.putString("password", password);
+                    editor.putString("email", email);
                     editor.putInt("money", money);
                     editor.apply();
                     //Empezar ShopActivity
