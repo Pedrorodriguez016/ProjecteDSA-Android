@@ -22,4 +22,8 @@ public interface ForumService {
 
     @GET("game/forums/{threadId}")
     Call<List<ForumMessage>> getThreadMessages(@Path("threadId") Integer threadId);
+
+    @POST("game/forums/{threadid}")
+    @Headers("Content-Type: application/json")
+    Call<ForumMessage> addMessages(@Path("threadid") Integer threadId, @Body ForumMessage message);
 }

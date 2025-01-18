@@ -19,8 +19,11 @@ import com.example.proyecto.R;
 import com.example.proyecto.models.ForumMessage;
 import com.example.proyecto.services.ForumService;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -115,23 +118,90 @@ public class ThreadDetailActivity extends AppCompatActivity {
 
     private void sendMessage() {
         String messageText = newMessageEditText.getText().toString().trim();
+
         if (messageText.isEmpty()) {
             Toast.makeText(this, "El mensaje no puede estar vacío", Toast.LENGTH_SHORT).show();
             return;
         }
 
+        // Obtener ID del usuario desde SharedPreferences
         SharedPreferences prefs = getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE);
-        int userId = prefs.getInt("id", -1);
+        Integer userId = prefs.getInt("id", 0); // Obtiene el ID como cadena
 
-        if (userId == -1) {
+
+
+        if (userId == 0) {
             Toast.makeText(this, "Error: Usuario no identificado", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // TODO: Implementar el envío del mensaje cuando se agregue el endpoint correspondiente
-        // Por ahora solo limpiamos el campo de texto
-        newMessageEditText.setText("");
-        Toast.makeText(this, "Funcionalidad en desarrollo", Toast.LENGTH_SHORT).show();
+        // Configurar Retrofit
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URI)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ForumService service = retrofit.create(ForumService.class);
+
+        // Primero, obtener el último mensaje en el hilo
+        service.getThreadMessages(threadId).enqueue(new Callback<List<ForumMessage>>() {
+            @Override
+            public void onResponse(Call<List<ForumMessage>> call, Response<List<ForumMessage>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<ForumMessage> messages = response.body();
+                    Integer parentMessageId = null;
+
+                    if (!messages.isEmpty()) {
+                        parentMessageId = messages.get(messages.size() - 1).getId(); // ID del último mensaje
+                    }
+
+                    // Crear el nuevo mensaje
+                    ForumMessage newMessage = new ForumMessage();
+                    newMessage.setMessage(messageText);
+                    newMessage.setDate(new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date()));
+                    newMessage.setSender(userId);
+                    newMessage.setThread(threadId);
+                    newMessage.setParent_message(parentMessageId); // Asigna el último mensaje como parent_message
+
+                    // Enviar el nuevo mensaje
+                    service.addMessages(threadId, newMessage).enqueue(new Callback<ForumMessage>() {
+                        @Override
+                        public void onResponse(Call<ForumMessage> call, Response<ForumMessage> response) {
+                            if (response.isSuccessful()) {
+                                newMessageEditText.setText("");
+                                Toast.makeText(ThreadDetailActivity.this, "Mensaje enviado", Toast.LENGTH_SHORT).show();
+                                loadMessages(); // Recargar los mensajes
+                            } else {
+                                Toast.makeText(ThreadDetailActivity.this,
+                                        "Error al enviar el mensaje: " + response.code(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ForumMessage> call, Throwable t) {
+                            Toast.makeText(ThreadDetailActivity.this,
+                                    "Error de conexión: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                            Log.e("Error", "Error al enviar mensaje: " + t.getMessage());
+                        }
+                    });
+                } else {
+                    Toast.makeText(ThreadDetailActivity.this,
+                            "Error al obtener mensajes anteriores", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ForumMessage>> call, Throwable t) {
+                Toast.makeText(ThreadDetailActivity.this,
+                        "Error de conexión: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e("Error", "Error al obtener mensajes: " + t.getMessage());
+            }
+        });
     }
 
     public void VolverOnClick(View v) {
