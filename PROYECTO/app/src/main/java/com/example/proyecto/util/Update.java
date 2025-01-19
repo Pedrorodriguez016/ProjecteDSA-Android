@@ -26,7 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Update extends AppCompatActivity {
     private ProgressBar progressBar;
-    public static final String BASE_URI = "http://10.0.2.2:8080/";
+    public static final String BASE_URI = "http://147.83.7.208:80/";
     private EditText editTextEmail;
     private EditText editTextPassword;
     private EditText editTextnewPassword;
@@ -79,6 +79,7 @@ public class Update extends AppCompatActivity {
         datos.setUsername(prefs.getString("username",""));
         datos.setPassword(prefs.getString("password", ""));
         datos.setId(prefs.getInt("id", 0));
+        datos.setMoney(prefs.getInt("money", 0));
         if (changepassword && (Password.isEmpty() || newPassword.isEmpty())) {
             Toast.makeText(this, "Introduce la contraseña actual y la nueva", Toast.LENGTH_SHORT).show();
             return;

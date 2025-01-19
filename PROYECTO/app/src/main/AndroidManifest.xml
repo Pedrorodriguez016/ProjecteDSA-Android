@@ -46,6 +46,13 @@
             tools:ignore="Instantiatable"></activity>
         <activity android:name=".util.NewThreadActivity"
             android:exported="false"></activity>
+        <activity
+            android:name=".util.UnityActivity"
+            android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|fontScale|layoutDirection|density"
+            android:hardwareAccelerated="true"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:exported="false">
+        </activity>
     </application>
 
 </manifest>

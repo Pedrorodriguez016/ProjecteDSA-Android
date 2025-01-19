@@ -27,7 +27,7 @@ public class PerfilUsuario extends AppCompatActivity {
     private TextView Email;
     private TextView Dinero;
     private ProgressBar progressBar;
-    public static final String BASE_URI = "http://10.0.2.2:8080/";
+    public static final String BASE_URI = "http://147.83.7.208:80/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +91,7 @@ public class PerfilUsuario extends AppCompatActivity {
         LoginService lista = retrofit.create(LoginService.class);
         SharedPreferences prefs = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-        Datos datos= new Datos();
+        Datos datos = new Datos();
         datos.setUsername(prefs.getString("username", ""));
         datos.setPassword(prefs.getString("password",""));
         datos.setEmail(prefs.getString("email",""));

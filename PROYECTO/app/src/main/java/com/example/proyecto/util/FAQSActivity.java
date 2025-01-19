@@ -26,9 +26,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import com.example.proyecto.R;
-import com.example.proyecto.models.Item;
 import com.example.proyecto.services.FAQService;
-import com.example.proyecto.services.ShopService;
 
 public class FAQSActivity extends AppCompatActivity {
 
@@ -38,7 +36,7 @@ public class FAQSActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private Datos datos;
     int id;
-    public static final String BASE_URI = "http://10.0.2.2:8080/";
+    public static final String BASE_URI = "http://147.83.7.208:80/";
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -70,9 +68,7 @@ public class FAQSActivity extends AppCompatActivity {
             public void onResponse(Call<List<FAQ>> call, Response<List<FAQ>> response) {
 
                 if (response.isSuccessful() && response.body() != null) {
-                    questions.clear();
-                    questions.addAll(response.body());
-                    adapter.notifyDataSetChanged();
+                    adapter.updateQuestions(response.body());
                     progressBar.setVisibility(View.GONE);
                 } else {
                     Log.e("Error", "Error al cargar los items: " + response.code());

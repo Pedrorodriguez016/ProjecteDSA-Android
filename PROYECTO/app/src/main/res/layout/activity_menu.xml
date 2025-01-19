@@ -85,7 +85,7 @@
                 android:textSize="18sp"/>
         </LinearLayout>
 
-        <!-- Tercera fila: Foro -->
+        <!-- Tercera fila: Foro y Juego -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -96,9 +96,19 @@
                 android:id="@+id/forumbtn"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
+                android:layout_marginEnd="16dp"
                 android:backgroundTint="@android:color/holo_blue_dark"
                 android:onClick="ForumOnClick"
                 android:text="Foro"
+                android:textSize="18sp"/>
+
+            <Button
+                android:id="@+id/gamebtn"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:backgroundTint="@android:color/holo_blue_dark"
+                android:onClick="GameOnClick"
+                android:text="Juego"
                 android:textSize="18sp"/>
         </LinearLayout>
 

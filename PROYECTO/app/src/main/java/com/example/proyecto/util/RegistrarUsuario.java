@@ -25,7 +25,7 @@ public class RegistrarUsuario extends AppCompatActivity{
     private EditText editTextContraseña;
     private EditText editTextEmail;
     private EditText editTextConfirmacion;
-    public static final String BASE_URI = "http://10.0.2.2:8080/";
+    public static final String BASE_URI = "http://147.83.7.208:80/";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -38,14 +38,19 @@ public class MenuUsuario extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+    public void GameOnClick(View v) {
+        Intent intent = new Intent(MenuUsuario.this, UnityActivity.class);
+        startActivity(intent);
+        finish();
+    }
     public void ForumOnClick(View v) {
         Intent intent = new Intent(MenuUsuario.this, ForumActivity.class);
         startActivity(intent);
         finish();
     }
     public void CerrarOnClick(View v) {
-        Toast.makeText(MenuUsuario.this, "Cierre Sesion", Toast.LENGTH_SHORT).show();
-        Log.i("INFO", "Cerrando Session");
+        Toast.makeText(MenuUsuario.this, "Cierre sesión", Toast.LENGTH_SHORT).show();
+        Log.i("INFO", "Cerrando sesión");
         SharedPreferences prefs = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.remove("username");

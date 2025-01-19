@@ -21,3 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "PROYECTO"
 include ':app'
+include ':unityLibrary'
+include ':unityModule'

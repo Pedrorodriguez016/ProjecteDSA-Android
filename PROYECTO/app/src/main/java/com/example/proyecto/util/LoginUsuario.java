@@ -24,7 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LoginUsuario extends AppCompatActivity {
     private EditText editTextUsername;
     private EditText editTextPassword;
-    public static final String BASE_URI = "http://10.0.2.2:8080/";
+    public static final String BASE_URI = "http://147.83.7.208:80/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
