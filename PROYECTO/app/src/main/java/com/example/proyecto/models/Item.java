@@ -12,14 +12,27 @@ public class Item {
     @SerializedName("value")
     private Integer value;
 
-    public Item(Integer id, String type, Integer value) {
+    @SerializedName("description")
+    private String description;
+
+
+    public Item(Integer id, String type, Integer value, String description) {
         this.id = id;
         this.type = type;
         this.value = value;
+        this.description = description;
     }
 
     public Integer getId() {
         return id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setId(Integer id) {

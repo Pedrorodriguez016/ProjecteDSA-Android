@@ -51,6 +51,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
         Item item = items.get(position);
         holder.itemName.setText(item.getType());
         holder.itemPrice.setText(item.getValue() + " coins");
+        holder.itemDescription.setText(item.getDescription());
 
         switch(item.getType()) {
             case "sword":
@@ -86,6 +87,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
         ImageView itemImage;
         TextView itemName;
         TextView itemPrice;
+        TextView itemDescription;
         Button buyButton;
 
         public ViewHolder(@NonNull View itemView) {
@@ -94,6 +96,8 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
             itemName = itemView.findViewById(R.id.itemName);
             itemPrice = itemView.findViewById(R.id.itemPrice);
             buyButton = itemView.findViewById(R.id.buyButton);
+            itemDescription= itemView.findViewById(R.id.itemDescription);
+
         }
     }
 }

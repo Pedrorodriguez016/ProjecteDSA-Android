@@ -76,14 +76,14 @@ public class LoginUsuario extends AppCompatActivity {
                     editor.putString("username", name);
                     editor.putString("password", password);
                     editor.putInt("money", money);
-                    editor.putString("id", String.valueOf(id));  // Guardamos el ID del usuario
+                    editor.putInt("id", id);
                     editor.apply();
-                    //Empezar ShopActivity
+
                     Intent intent = new Intent(LoginUsuario.this, MenuUsuario.class);
                     startActivity(intent);
                     finish();
                 } else {
-                    //Por si falla el login
+
                     Toast.makeText(LoginUsuario.this, "Ha fallado el login. Inténtalo otra vez.", Toast.LENGTH_SHORT).show();
                 }
             }

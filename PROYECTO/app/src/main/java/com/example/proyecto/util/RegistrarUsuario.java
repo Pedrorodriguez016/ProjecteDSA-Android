@@ -47,7 +47,7 @@ public class RegistrarUsuario extends AppCompatActivity{
         String password = editTextContraseña.getText().toString();
         String confirmacion= editTextConfirmacion.getText().toString();
         String email = editTextEmail.getText().toString();
-        //Validar el input
+
         if(!password.equals(confirmacion)) {
             Toast.makeText(this, "Contraseñas incorrectas", Toast.LENGTH_SHORT).show();
             return;
@@ -81,7 +81,7 @@ public class RegistrarUsuario extends AppCompatActivity{
             public void onResponse(Call<DatosRegistro> call, Response<DatosRegistro> response) {
 
                 if (response.isSuccessful()) {
-                    //Registro con éxito
+
                     DatosRegistro datosresponse = response.body();
                     int id= datosresponse.getId();
                     Toast.makeText(RegistrarUsuario.this, "Registro completado.", Toast.LENGTH_SHORT).show();
@@ -98,7 +98,7 @@ public class RegistrarUsuario extends AppCompatActivity{
 
 
                 } else {
-                    //Falla el registro
+
                     Toast.makeText(RegistrarUsuario.this, "Registro fallido. Inténtalo otra vez.", Toast.LENGTH_SHORT).show();
                     editTextUsername.setText("");
                     editTextContraseña.setText("");

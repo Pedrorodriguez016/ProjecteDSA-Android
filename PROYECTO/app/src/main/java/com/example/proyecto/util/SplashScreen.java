@@ -27,6 +27,7 @@ public class SplashScreen extends AppCompatActivity {
     private static final String KEY_IS_LOGGED_IN = "isLoggedIn";
     private static final String KEY_USERNAME = "username";
     private static final String KEY_PASSWORD = "password";
+    private static final String KEY_MONEY = "money";
     Intent intent;
     public static final String BASE_URI = "http://10.0.2.2:8080/";
     @Override
@@ -66,7 +67,12 @@ public class SplashScreen extends AppCompatActivity {
             @Override
             public void onResponse(Call<Datos> call, Response<Datos> response) {
                 if (response.isSuccessful()) {
-                    // Login válido, ir a Shop
+                    Datos datos = response.body();
+                    int money = datos.getMoney();
+                    SharedPreferences prefs = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putInt(KEY_MONEY, money);
+                    Log.i("info", String.valueOf(money));
                     goToMenu();
                 } else {
                     goToLogin();

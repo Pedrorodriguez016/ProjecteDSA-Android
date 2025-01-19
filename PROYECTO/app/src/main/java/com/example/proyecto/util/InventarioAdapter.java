@@ -42,6 +42,7 @@ public class InventarioAdapter extends RecyclerView.Adapter<InventarioAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Inventario inventario = items.get(position);
+        holder.itemquantity.setText("cantidad: " +String.valueOf(inventario.getQuantity()));
 
         switch(inventario.getItem()) {
             case 3:
@@ -69,12 +70,12 @@ public class InventarioAdapter extends RecyclerView.Adapter<InventarioAdapter.Vi
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView itemImage;
-        TextView itemName;
+        TextView itemquantity;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             itemImage = itemView.findViewById(R.id.itemimage);
-            itemName = itemView.findViewById(R.id.itemname);
+            itemquantity = itemView.findViewById(R.id.itemquantity);
         }
     }
 }
