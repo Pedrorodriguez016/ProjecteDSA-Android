@@ -97,9 +97,9 @@ public class PerfilUsuario extends AppCompatActivity {
         datos.setEmail(prefs.getString("email",""));
         datos.setId(prefs.getInt("id", 0));
         datos.setMoney(prefs.getInt("money", 0));
-        lista.DeleteUser(datos.username, datos).enqueue(new Callback<Datos>() {
+        lista.DeleteUser(datos.username, datos).enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<Datos> call, Response<Datos> response) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     editor.clear();
                     editor.commit();
@@ -115,7 +115,7 @@ public class PerfilUsuario extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Datos> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
                 Log.e("Error", "Error de conexión: " + t.getMessage());
             }

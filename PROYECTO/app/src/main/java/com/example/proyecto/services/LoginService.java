@@ -26,7 +26,7 @@ public interface LoginService {
     Call<Datos> getUser(@Path("username")String username);
     @POST("game/user/{username}")
     @Headers("Content-Type: application/json")
-    Call<Datos> DeleteUser(@Path("username")String username, @Body Datos datos);
+    Call<Void> DeleteUser(@Path("username")String username, @Body Datos datos);
     @PUT("game/user/{username}")
     @Headers("Content-Type: application/json")
     Call<Datos> UpdateUser(@Path("username") String username, @Query("chgpass") boolean changePass, @Query("newpass") String newPassword, @Body Datos d);
